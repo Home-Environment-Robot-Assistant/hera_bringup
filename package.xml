@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>hera_bringup</name>
+  <version>0.0.0</version>
+  <description>
+    This package contains launch files and resources to bring up the [HERA robot (2020 version)](http://robofei.aquinno.com/athome/wp-content/uploads/2020/01/TDP2020ROBOFEI.pdf).
+  </description>
+
+  <maintainer email="fagnerpimentel@gmail.com">Fagner Pimentel</maintainer>
+  <author email="fagnerpimentel@gmail.com">Fagner Pimentel</author>
+  <url type="website">https://gitlab.com/fpimentel/hera/hera_bringup</url>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+</package>
