@@ -4,8 +4,10 @@
   <arg name="robot_model"           default="hera_full"/>
   <arg name="map_name"              default="empty"/>
   <arg name="use_fake_localization" default="false"/>
+  
   <arg name="global_planner"        default="navfn/NavfnROS"/>
   <arg name="local_planner"         default="eband_local_planner/EBandPlannerROS"/>
+  <arg name="observation_sources"   default="laser_scan_back_observation"/>
 
   <arg name="enable_description"    default="true"/>
   <arg name="enable_map"            default="true"/>
@@ -39,6 +41,7 @@
     <include file="$(find hera_nav)/launch/navigation.xml">
       <arg name="global_planner" default="$(arg global_planner)"/>
       <arg name="local_planner"  default="$(arg local_planner)"/>
+      <arg name="observation_sources"   default="$(arg observation_sources)"/>
     </include>
   </group>
 
