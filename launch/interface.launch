@@ -2,8 +2,14 @@
 <launch>
 
   <arg name="rviz_file"           default="$(find hera_bringup)/config/rviz/hera.rviz"/>
+  <arg name="enable_gui_gazebo"   default="true"/>
   <arg name="enable_gui_rviz"     default="true"/>
   <arg name="enable_gui_teleop"   default="true"/>
+
+  <!-- gazebo -->
+  <group if="$(arg enable_gui_gazebo)" >
+    <node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>
+  </group>
 
   <!-- rviz -->
   <group if="$(arg enable_gui_rviz)" >
