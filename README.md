@@ -1,4 +1,4 @@
-# hera_nav
+# hera_bringup
 
 This package contains launch files and resources to bring up the [HERA robot (2020 version)](http://robofei.aquinno.com/athome/wp-content/uploads/2020/01/TDP2020ROBOFEI.pdf).
 
@@ -9,37 +9,16 @@ This package contains launch files and resources to bring up the [HERA robot (20
 * [hera_description](https://gitlab.com/fpimentel/hera/hera_description)
 * [hera_nav](https://gitlab.com/fpimentel/hera/hera_nav)
 
-## File structure:
-```
-|-- hera_description
-  |-- config
-  |-- doc
-  |-- launch
-  |-- resources
-  |-- CMakeLists.txt
-  |-- package.xml
-  |-- README.md
-```
-
-### config:
-This folder contains parameters configurations used to visualize the robot.
+### Configuration:
+There are a folder called ```config```, that contains parameters configurations used to visualize the robot.
 ```
   |-- config
     |-- rviz
       |-- hera.rviz
 ```
 
-### doc
-This folder contains files used in this markdown document.
-```
-  |-- doc
-    .
-    .
-    .
-```
-
 ### launch:
-This folder contains files used to bring up and enable interface to the robot using roslaunch in the ROS ecosystem.
+There are a folder called ```launch```, that contains files used to bring up and enable interface to the robot using roslaunch in the ROS ecosystem.
 ```
   |-- launch
     |--bring_up.launch
@@ -60,8 +39,8 @@ This folder contains files used to bring up and enable interface to the robot us
   * **enable_gui_rviz**: (boolean, default: true) - Enable/disable rviz gui to visualize the robot.
   * **enable_gui_teleop**: (boolean, default: true) - Enable/disable teleoperation gui to control the robot navigation.
 
-### resources
-This folder contains the resources used by the robot.
+### Resources
+There are a folder called ```launch```, that contains the resources used by the robot.
 ```
   |-- resources
     |-- map
@@ -69,3 +48,5 @@ This folder contains the resources used by the robot.
       |-- simple_room
 ```
 * **map**: Mapped environments available.
+
+# How to use this repository
