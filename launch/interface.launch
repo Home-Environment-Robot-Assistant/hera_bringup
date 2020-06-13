@@ -8,6 +8,7 @@
 
   <!-- gazebo -->
   <group if="$(arg enable_gui_gazebo)" >
+    <env name="GAZEBO_MODEL_PATH" value="$GAZEBO_MODEL_PATH:$(find social_worlds)/models/:$(find social_worlds)/models/3dparty/"/>
     <node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>
   </group>
 
