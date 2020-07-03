@@ -6,7 +6,7 @@
   <arg name="init_pos_y" 	          default="0.0"/>
   <arg name="init_yaw"   	          default="0.0"/>
   <arg name="map_name"              default="empty"/>
-  <arg name="use_fake_localization" default="false"/>
+  <arg name="use_amcl"              default="true"/>
 
   <arg name="global_planner"        default="navfn/NavfnROS"/>
   <arg name="local_planner"         default="base_local_planner/TrajectoryPlannerROS"/>
@@ -42,7 +42,7 @@
   <!-- localization -->
   <group if="$(arg enable_localization)" >
     <include file="$(find hera_nav)/launch/localization.xml">
-      <arg name="use_fake_localization" default="$(arg use_fake_localization)"/>
+      <arg name="use_amcl" default="$(arg use_amcl)"/>
     </include>
   </group>
 
