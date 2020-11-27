@@ -59,7 +59,7 @@
     </include>
   </group>
 
-  <!-- <node name="joint_torso_to_torso_sensor_plat" pkg="rosservice" type="rosservice"
-    respawn="true" args="call /gazebo/set_model_configuration '{model_name: \'robot\', urdf_param_name: \'robot\', joint_names:[\'joint_torso_to_torso_sensor_plat\'], joint_positions:[0]}'" /> -->
+  <!-- control robot in the simulated environment -->
+  <node name="gazebo_control_hera" pkg="hera_control" type="gazebo_control.py" output="screen" />
 
 </launch>

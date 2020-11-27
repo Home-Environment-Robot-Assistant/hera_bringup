@@ -1,13 +1,14 @@
 # hera_bringup
 
-This package contains launch files and resources to bring up the [HERA robot (2020 version)](http://robofei.aquinno.com/athome/wp-content/uploads/2020/01/TDP2020ROBOFEI.pdf).
+This package contains launch files and resources to bring up the [HERA (2020 version)](http://robofei.aquinno.com/athome/wp-content/uploads/2020/01/TDP2020ROBOFEI.pdf).
 
 ## Dependencies:
 * [ROS](https://www.ros.org/) (Melodic Morenia)
   * [roslaunch](http://wiki.ros.org/roslaunch)
   * [rviz](http://wiki.ros.org/rviz)
-* [hera_description](https://gitlab.com/fpimentel/hera/hera_description)
-* [hera_nav](https://gitlab.com/fpimentel/hera/hera_nav)
+* [hera_description](https://github.com/Home-Environment-Robot-Assistant/hera_description)
+* [hera_control](https://github.com/Home-Environment-Robot-Assistant/hera_control)
+* [hera_nav](https://github.com/Home-Environment-Robot-Assistant/hera_nav)
 
 ### Configuration:
 There are a folder called ```config```, that contains parameters configurations used to visualize the robot.
@@ -50,3 +51,9 @@ There are a folder called ```launch```, that contains the resources used by the 
 * **map**: Mapped environments available.
 
 # How to use this repository
+
+```bash
+roslaunch gazebo_ros empty_world.launch gui:=false
+roslaunch hera_bringup bring_up.launch
+roslaunch hera_bringup interface.launch 
+```
