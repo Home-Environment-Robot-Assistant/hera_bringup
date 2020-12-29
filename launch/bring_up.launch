@@ -5,7 +5,7 @@
   <arg name="init_pos_x" 	          default="0.0"/>
   <arg name="init_pos_y" 	          default="0.0"/>
   <arg name="init_yaw"   	          default="0.0"/>
-  <arg name="map_name"              default="empty"/>
+  <arg name="map_config"            default=""/>
   <arg name="use_amcl"              default="true"/>
 
   <arg name="global_planner"        default="navfn/NavfnROS"/>
@@ -36,7 +36,7 @@
   <!-- load map -->
   <group if="$(arg enable_map)" >
     <node name="map_server" pkg="map_server" type="map_server" output="screen"
-      args="$(find hera_bringup)/resources/map/$(arg map_name)/map.yaml"/>
+      args="$(arg map_config)"/>
     </group>
 
   <!-- localization -->
