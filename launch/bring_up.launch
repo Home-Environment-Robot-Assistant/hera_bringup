@@ -59,6 +59,12 @@
     </include>
   </group>
 
+  <!-- social_reasoning -->
+  <include file="$(find social_reasoning)/launch/social_reasoning.launch" />
+
+  <!-- social_navigation -->
+  <node name="social_navigation" pkg="social_move_base" type="social_move_base_node" output="screen" />
+
   <!-- control robot in the simulated environment -->
   <node name="gazebo_control_hera" pkg="hera_control" type="gazebo_control.py" output="screen" />
 

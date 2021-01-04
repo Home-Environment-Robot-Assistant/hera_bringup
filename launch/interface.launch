@@ -5,6 +5,7 @@
   <arg name="enable_gui_gazebo"   default="true"/>
   <arg name="enable_gui_rviz"     default="true"/>
   <arg name="enable_gui_teleop"   default="true"/>
+  <arg name="enable_gui_telegram" default="true"/>
 
   <!-- gazebo -->
   <group if="$(arg enable_gui_gazebo)" >
@@ -14,14 +15,19 @@
 
   <!-- rviz -->
   <group if="$(arg enable_gui_rviz)" >
-    <node name="rviz" pkg="rviz" type="rviz" output="screen"
-      args="-d $(arg rviz_file)" />
+    <node name="rviz" pkg="rviz" type="rviz"
+      output="screen" args="-d $(arg rviz_file)" />
   </group>
 
   <!-- keyboard teleop -->
   <group if="$(arg enable_gui_teleop)" >
     <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"
       output="screen" launch-prefix="xterm -hold -e"/>
+  </group>
+
+  <!-- telegram -->
+  <group if="$(arg enable_gui_telegram)" >
+    <node name="hera_telegram" pkg="hera_telegram" type="bot.py" output="screen" />
   </group>
 
 </launch>
