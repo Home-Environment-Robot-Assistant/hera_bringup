@@ -8,6 +8,7 @@
   <arg name="map_config"            default=""/>
   <arg name="use_amcl"              default="true"/>
 
+  <arg name="database_input"        default="$(find social_reasoning)/ontology_input.db"/>
   <arg name="global_planner"        default="navfn/NavfnROS"/>
   <arg name="local_planner"         default="base_local_planner/TrajectoryPlannerROS"/>
   <arg name="global_layers"         default="[ {name: static_layer, type: 'costmap_2d::StaticLayer'}, {name: obstacles_layer, type: 'costmap_2d::VoxelLayer'}, {name: inflation_layer, type: 'costmap_2d::InflationLayer'}]" />
@@ -16,22 +17,25 @@
   <arg name="xy_goal_tolerance"     default="0.1"/>
   <arg name="yaw_goal_tolerance"    default="0.05"/>
 
-  <arg name="enable_description"    default="true"/>
   <arg name="enable_map"            default="true"/>
   <arg name="enable_localization"   default="true"/>
   <arg name="enable_navigation"     default="true"/>
+  <arg name="enable_talk"           default="true"/>
+  <arg name="enable_perception"     default="true"/>
+
 
   <!-- ##################################################################### -->
 
   <!-- load hera description -->
-  <group if="$(arg enable_description)" >
-    <include file="$(find hera_description)/launch/load_description.launch">
-      <arg name="robot_model" default="$(arg robot_model)"/>
-      <arg name="init_pos_x" 	default="$(arg init_pos_x)"/>
-      <arg name="init_pos_y" 	default="$(arg init_pos_y)"/>
-      <arg name="init_yaw"   	default="$(arg init_yaw)"/>
-    </include>
-  </group>
+  <include file="$(find hera_description)/launch/load_description.launch">
+    <arg name="robot_model" default="$(arg robot_model)"/>
+    <arg name="init_pos_x" 	default="$(arg init_pos_x)"/>
+    <arg name="init_pos_y" 	default="$(arg init_pos_y)"/>
+    <arg name="init_yaw"   	default="$(arg init_yaw)"/>
+  </include>
+
+  <!-- control robot in the simulated environment -->
+  <node name="gazebo_control_hera" pkg="hera_control" type="gazebo_control.py" output="screen" />
 
   <!-- load map -->
   <group if="$(arg enable_map)" >
@@ -59,13 +63,40 @@
     </include>
   </group>
 
+  <!-- talk -->
+  <group if="$(arg enable_talk)">
+    <node name="gtts_ros" pkg="gtts_ros" type="gtts_node.py">
+      <param name="ONLINE" value="true" />
+    </node>
+  </group>
+
+  <!-- perception -->
+  <!-- <group if="$(arg enable_perception)">
+    <node pkg="hokuyo_node" type="hokuyo_node" name="hokuyo_node" output="screen">
+      <param name="frame_id" value="map"/>
+    </node>
+    <param name="scan_topic" value="/scan" />
+
+    <param name="forest_file" value="$(find leg_tracker)/config/trained_leg_detector_res=0.33.yaml" />
+    <param name="scan_topic" value="/base_scan_front" />
+    <param name="fixed_frame" value="map"/>
+    <param name="scan_frequency" value="10"/>
+    <node pkg="leg_tracker" type="detect_leg_clusters" name="detect_leg_clusters" output="screen"/>
+    <node pkg="leg_tracker" type="joint_leg_tracker.py" name="joint_leg_tracker" output="screen"/>
+    <node pkg="leg_tracker" type="local_occupancy_grid_mapping" name="local_occupancy_grid_mapping" output="screen"/>
+    <node pkg="social_perception" type="people_perception.py" name="people_perception" output="screen"/>
+  </group> -->
+
+  <!-- SOCIAL -->
+
   <!-- social_reasoning -->
-  <include file="$(find social_reasoning)/launch/social_reasoning.launch" />
+  <include file="$(find social_reasoning)/launch/social_reasoning.launch" >
+    <arg name="db_path_input" value="$(arg database_input)" />
+  </include>
 
   <!-- social_navigation -->
-  <node name="social_navigation" pkg="social_move_base" type="social_move_base_node" output="screen" />
-
-  <!-- control robot in the simulated environment -->
-  <node name="gazebo_control_hera" pkg="hera_control" type="gazebo_control.py" output="screen" />
+  <include file="$(find social_move_base)/launch/start.launch" >
+    <arg name="global_planner" default="$(arg global_planner)"/>
+  </include>
 
 </launch>

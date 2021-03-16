@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 <launch>
 
+    <!-- find path to devices ports -->
+    <node name="laser" pkg="hera_bringup" type="path_finder.py" args="15d1 0000"/>
+    <node name="arduino_base" pkg="hera_bringup" type="path_finder.py" args="2341 003d"/>
+    <!-- <node name="arduino_head" pkg="hera_bringup" type="path_finder.py" args="2341 0043"/> -->
+    <!-- <node name="dynamixel" pkg="hera_bringup" type="path_finder.py" args="fff1 ff48"/> -->
+
     <!-- arduino base -->
     <node name="serial_node" pkg="rosserial_python" type="serial_node.py">
       <param name="port" value="/dev/base"/>
@@ -57,5 +63,15 @@
     <!-- manipulator -->
     <!-- <include file="$(find manip3)/launch/manip3.launch" /> -->
     <!-- <node name ="manipulator" pkg="manip3" type="manipulator.py" output="screen"/> -->
+
+    <!-- people tracker -->
+    <!-- <param name="forest_file" value="$(find leg_tracker)/config/trained_leg_detector_res=0.33.yaml" />
+    <param name="scan_topic" value="/base_scan_front" />
+    <param name="fixed_frame" value="base_scan_front"/>
+    <param name="scan_frequency" value="10"/>
+    <node pkg="leg_tracker" type="detect_leg_clusters" name="detect_leg_clusters" output="screen"/>
+    <node pkg="leg_tracker" type="joint_leg_tracker.py" name="joint_leg_tracker" output="screen"/>
+    <node pkg="leg_tracker" type="local_occupancy_grid_mapping" name="local_occupancy_grid_mapping" output="screen"/>
+    <node pkg="social_perception" type="people_perception.py" name="people_perception" output="screen"/> -->
 
 </launch>
