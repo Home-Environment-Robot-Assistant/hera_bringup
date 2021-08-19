@@ -5,7 +5,7 @@
   <arg name="init_pos_x" 	          default="0.0"/>
   <arg name="init_pos_y" 	          default="0.0"/>
   <arg name="init_yaw"   	          default="0.0"/>
-  <arg name="map_config"            default=""/>
+  <arg name="map_path"            default=""/>
   <arg name="use_amcl"              default="true"/>
 
   <arg name="database_input"        default="$(find social_reasoning)/ontology_input.db"/>
@@ -40,7 +40,7 @@
   <!-- load map -->
   <group if="$(arg enable_map)" >
     <node name="map_server" pkg="map_server" type="map_server" output="screen"
-      args="$(arg map_config)"/>
+      args="$(arg map_path)"/>
     </group>
 
   <!-- localization -->
